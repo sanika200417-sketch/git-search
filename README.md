@@ -1,10 +1,12 @@
 # git-search
 
+[![CI](https://github.com/forjd/git-search/actions/workflows/ci.yml/badge.svg)](https://github.com/forjd/git-search/actions/workflows/ci.yml)
 [![Bun](https://img.shields.io/badge/runtime-Bun-f9f1e1?logo=bun&logoColor=000)](https://bun.sh)
 [![SQLite](https://img.shields.io/badge/storage-SQLite-003B57?logo=sqlite&logoColor=fff)](https://www.sqlite.org)
 [![Transformers.js](https://img.shields.io/badge/embeddings-Transformers.js-FFD21E?logo=huggingface&logoColor=000)](https://huggingface.co/docs/transformers.js)
-[![License](https://img.shields.io/badge/licence-private-red)]()
+[![Biome](https://img.shields.io/badge/linter-Biome-60a5fa?logo=biome&logoColor=fff)](https://biomejs.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=fff)](https://www.typescriptlang.org)
+[![License](https://img.shields.io/badge/licence-private-red)]()
 
 Semantic search over your git commit history, right in the terminal.
 
