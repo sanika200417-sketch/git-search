@@ -1,14 +1,14 @@
+import type { Database } from "bun:sqlite";
 import {
   BoxRenderable,
-  TextRenderable,
-  ScrollBoxRenderable,
-  t,
   bold,
   dim,
   fg,
   type RenderContext,
+  ScrollBoxRenderable,
+  TextRenderable,
+  t,
 } from "@opentui/core";
-import type { Database } from "bun:sqlite";
 import { getCommitFiles, type SearchResult } from "../db/queries.ts";
 
 export class CommitDetail {

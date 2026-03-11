@@ -1,16 +1,12 @@
 import type { Database } from "bun:sqlite";
 import { getMeta, setMeta } from "../db/database.ts";
 import {
-  insertCommits,
   insertCommitFiles,
+  insertCommits,
   insertEmbeddings,
 } from "../db/queries.ts";
-import {
-  readCommits,
-  getLatestCommitHash,
-  type GitCommitWithFiles,
-} from "./git.ts";
-import { loadModel, embedTexts, composeEmbeddingText } from "./embedder.ts";
+import { composeEmbeddingText, embedTexts, loadModel } from "./embedder.ts";
+import { getLatestCommitHash, readCommits } from "./git.ts";
 
 export type IndexPhase =
   | "loading_model"
@@ -81,10 +77,11 @@ export async function runIndex(
     onProgress?.({ phase: "embedding", current: embedded, total });
     const embeddings = await embedTexts(texts);
 
-    const embeddingRows = batch.map((c, j) => ({
-      commit_hash: c.commit.hash,
-      embedding: embeddings[j]!,
-    }));
+    const embeddingRows = batch.map((c, j) => {
+      const embedding = embeddings[j];
+      if (!embedding) throw new Error(`Missing embedding for index ${j}`);
+      return { commit_hash: c.commit.hash, embedding };
+    });
     insertEmbeddings(db, embeddingRows);
 
     embedded += batch.length;

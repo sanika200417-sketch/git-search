@@ -1,11 +1,11 @@
 import {
   BoxRenderable,
-  TextRenderable,
-  t,
   bold,
   dim,
   fg,
   type RenderContext,
+  TextRenderable,
+  t,
 } from "@opentui/core";
 import type { IndexProgress } from "../indexer/indexer.ts";
 

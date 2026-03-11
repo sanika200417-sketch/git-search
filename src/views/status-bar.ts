@@ -1,11 +1,10 @@
 import {
   BoxRenderable,
-  TextRenderable,
-  t,
   dim,
   fg,
-  bg,
   type RenderContext,
+  TextRenderable,
+  t,
 } from "@opentui/core";
 
 export class StatusBar {

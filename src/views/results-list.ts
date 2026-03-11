@@ -1,14 +1,12 @@
 import {
   BoxRenderable,
-  TextRenderable,
-  SelectRenderable,
-  SelectRenderableEvents,
-  t,
-  bold,
   dim,
-  fg,
   type RenderContext,
   type SelectOption,
+  SelectRenderable,
+  SelectRenderableEvents,
+  TextRenderable,
+  t,
 } from "@opentui/core";
 import type { SearchResult } from "../db/queries.ts";
 
@@ -16,7 +14,6 @@ export class ResultsList {
   readonly container: BoxRenderable;
   private select: SelectRenderable;
   private emptyText: TextRenderable;
-  private results: SearchResult[] = [];
 
   constructor(ctx: RenderContext) {
     this.container = new BoxRenderable(ctx, {
@@ -73,7 +70,7 @@ export class ResultsList {
       const shortHash = r.hash.slice(0, 7);
       const score = ((1 - r.distance) * 100).toFixed(0);
       const messageLine =
-        r.message.length > 72 ? r.message.slice(0, 72) + "…" : r.message;
+        r.message.length > 72 ? `${r.message.slice(0, 72)}…` : r.message;
 
       return {
         name: `${shortHash}  ${messageLine}`,

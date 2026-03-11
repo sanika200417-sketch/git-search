@@ -8,9 +8,12 @@
   },
   "scripts": {
     "dev": "bun run src/index.ts",
-    "test": "bun test"
+    "test": "bun test",
+    "check": "bunx biome check src/",
+    "fix": "bunx biome check --write src/"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.4.6",
     "@types/bun": "latest"
   },
   "peerDependencies": {

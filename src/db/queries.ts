@@ -97,10 +97,7 @@ export function searchEmbeddings(
     .all(queryEmbedding, limit) as SearchResult[];
 }
 
-export function getCommitFiles(
-  db: Database,
-  commitHash: string,
-): CommitFile[] {
+export function getCommitFiles(db: Database, commitHash: string): CommitFile[] {
   return db
     .prepare("SELECT * FROM commit_files WHERE commit_hash = ?")
     .all(commitHash) as CommitFile[];

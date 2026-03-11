@@ -1,15 +1,15 @@
-import type { CliRenderer } from "@opentui/core";
 import type { Database } from "bun:sqlite";
 import { basename } from "node:path";
-import { IndexingScreen } from "./views/indexing-screen.ts";
-import { SearchInput } from "./views/search-input.ts";
-import { ResultsList } from "./views/results-list.ts";
-import { CommitDetail } from "./views/commit-detail.ts";
-import { StatusBar } from "./views/status-bar.ts";
-import { runIndex, type IndexProgress } from "./indexer/indexer.ts";
-import { search, type SearchResult } from "./search/search.ts";
+import type { CliRenderer } from "@opentui/core";
 import { getCommitCount } from "./db/queries.ts";
 import { loadModel } from "./indexer/embedder.ts";
+import { type IndexProgress, runIndex } from "./indexer/indexer.ts";
+import { type SearchResult, search } from "./search/search.ts";
+import { CommitDetail } from "./views/commit-detail.ts";
+import { IndexingScreen } from "./views/indexing-screen.ts";
+import { ResultsList } from "./views/results-list.ts";
+import { SearchInput } from "./views/search-input.ts";
+import { StatusBar } from "./views/status-bar.ts";
 
 export class App {
   private renderer: CliRenderer;
@@ -113,7 +113,7 @@ export class App {
       this.renderer.requestRender();
     };
 
-    const result = await runIndex(this.db, onProgress);
+    const _result = await runIndex(this.db, onProgress);
 
     // Transition to search screen
     this.indexingScreen.container.destroy();

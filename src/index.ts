@@ -1,10 +1,10 @@
 #!/usr/bin/env bun
 import { createCliRenderer } from "@opentui/core";
-import { getGitRoot, getTotalCommitCount } from "./indexer/git.ts";
+import { App } from "./app.ts";
 import { openDatabase } from "./db/database.ts";
 import { getCommitCount, getEmbeddingCount } from "./db/queries.ts";
-import { reindex, runIndex } from "./indexer/indexer.ts";
-import { App } from "./app.ts";
+import { getGitRoot, getTotalCommitCount } from "./indexer/git.ts";
+import { reindex } from "./indexer/indexer.ts";
 
 const command = process.argv[2];
 
@@ -38,9 +38,7 @@ async function main(): Promise<void> {
     console.log("Re-indexing all commits…");
     const result = await reindex(db, (progress) => {
       if (progress.total > 0) {
-        const pct = Math.round(
-          (progress.current / progress.total) * 100,
-        );
+        const pct = Math.round((progress.current / progress.total) * 100);
         process.stdout.write(
           `\r${progress.phase}: ${progress.current}/${progress.total} (${pct}%)`,
         );
@@ -55,12 +53,12 @@ async function main(): Promise<void> {
 
   if (command && command !== "--help") {
     console.error(`Unknown command: ${command}`);
-    console.error("Usage: forjd-git-search [reindex|status]");
+    console.error("Usage: git-search [reindex|status]");
     process.exit(1);
   }
 
   if (command === "--help") {
-    console.log("Usage: forjd-git-search [command]");
+    console.log("Usage: git-search [command]");
     console.log("");
     console.log("Commands:");
     console.log("  (none)     Launch search TUI (indexes if needed)");

@@ -1,7 +1,7 @@
 import { Database } from "bun:sqlite";
-import * as sqliteVec from "sqlite-vec";
 import { existsSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
+import * as sqliteVec from "sqlite-vec";
 
 const HOMEBREW_SQLITE_PATH = "/opt/homebrew/opt/sqlite/lib/libsqlite3.dylib";
 
@@ -111,8 +111,8 @@ export function getMeta(db: Database, key: string): string | undefined {
 }
 
 export function setMeta(db: Database, key: string, value: string): void {
-  db.run(
-    "INSERT OR REPLACE INTO meta (key, value) VALUES (?, ?)",
-    [key, value],
-  );
+  db.run("INSERT OR REPLACE INTO meta (key, value) VALUES (?, ?)", [
+    key,
+    value,
+  ]);
 }

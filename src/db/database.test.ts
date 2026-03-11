@@ -1,16 +1,16 @@
-import { describe, expect, test, beforeEach, afterEach } from "bun:test";
 import { Database } from "bun:sqlite";
+import { afterEach, beforeEach, describe, expect, test } from "bun:test";
 import * as sqliteVec from "sqlite-vec";
 import {
-  insertCommits,
-  insertCommitFiles,
-  insertEmbeddings,
-  searchEmbeddings,
-  getCommitFiles,
-  getCommitCount,
-  getEmbeddingCount,
   type Commit,
   type CommitFile,
+  getCommitCount,
+  getCommitFiles,
+  getEmbeddingCount,
+  insertCommitFiles,
+  insertCommits,
+  insertEmbeddings,
+  searchEmbeddings,
 } from "./queries.ts";
 
 // Must set custom SQLite before creating any Database instances
@@ -107,15 +107,13 @@ describe("database queries", () => {
     insertCommits(db, [testCommit]);
 
     const embedding = new Float32Array(384).fill(0.1);
-    insertEmbeddings(db, [
-      { commit_hash: "abc1234567890", embedding },
-    ]);
+    insertEmbeddings(db, [{ commit_hash: "abc1234567890", embedding }]);
     expect(getEmbeddingCount(db)).toBe(1);
 
     const results = searchEmbeddings(db, embedding, 5);
     expect(results).toHaveLength(1);
-    expect(results[0]!.hash).toBe("abc1234567890");
-    expect(results[0]!.distance).toBe(0);
+    expect(results[0]?.hash).toBe("abc1234567890");
+    expect(results[0]?.distance).toBe(0);
   });
 
   test("searchEmbeddings returns results ordered by distance", () => {
@@ -137,15 +135,13 @@ describe("database queries", () => {
     const query = new Float32Array(384).fill(0.12);
     const results = searchEmbeddings(db, query, 5);
     expect(results).toHaveLength(2);
-    expect(results[0]!.hash).toBe("abc1234567890");
+    expect(results[0]?.hash).toBe("abc1234567890");
   });
 
   test("searchEmbeddings respects limit", () => {
     insertCommits(db, [testCommit]);
     const embedding = new Float32Array(384).fill(0.1);
-    insertEmbeddings(db, [
-      { commit_hash: "abc1234567890", embedding },
-    ]);
+    insertEmbeddings(db, [{ commit_hash: "abc1234567890", embedding }]);
 
     const results = searchEmbeddings(db, embedding, 0);
     expect(results).toHaveLength(0);

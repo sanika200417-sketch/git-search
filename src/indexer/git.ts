@@ -81,35 +81,42 @@ export function parseGitLog(output: string): GitCommitWithFiles[] {
     if (lines.length === 0) continue;
 
     // First line contains the formatted commit fields
-    const fields = lines[0]!.split(FIELD_SEP);
+    const firstLine = lines[0];
+    if (!firstLine) continue;
+
+    const fields = firstLine.split(FIELD_SEP);
     if (fields.length < 5) continue;
 
-    const [hash, message, authorName, authorEmail, dateStr, parentsStr] =
-      fields;
+    const hash = fields[0] ?? "";
+    const message = fields[1] ?? "";
+    const authorName = fields[2] ?? "";
+    const authorEmail = fields[3] ?? "";
+    const dateStr = fields[4] ?? "0";
+    const parentsStr = fields[5] ?? "";
 
     const commit: Commit = {
-      hash: hash!,
-      message: message!,
-      author_name: authorName!,
-      author_email: authorEmail!,
-      date: parseInt(dateStr!, 10),
-      parents: parentsStr ?? "",
+      hash,
+      message,
+      author_name: authorName,
+      author_email: authorEmail,
+      date: parseInt(dateStr, 10),
+      parents: parentsStr,
     };
 
     // Remaining lines are file status entries (tab-separated: status\tpath)
     const files: CommitFile[] = [];
     for (let i = 1; i < lines.length; i++) {
-      const line = lines[i]!.trim();
+      const line = lines[i]?.trim();
       if (!line) continue;
 
       const parts = line.split("\t");
       if (parts.length < 2) continue;
 
-      const status = parts[0]!.charAt(0); // Just first char (R100 → R)
-      const filePath = parts.length === 3 ? parts[2]! : parts[1]!; // For renames, use new path
+      const status = parts[0]?.charAt(0) ?? "M"; // Just first char (R100 → R)
+      const filePath = parts.length === 3 ? (parts[2] ?? "") : (parts[1] ?? ""); // For renames, use new path
 
       files.push({
-        commit_hash: hash!,
+        commit_hash: hash,
         file_path: filePath,
         status,
       });

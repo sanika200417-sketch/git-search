@@ -1,12 +1,11 @@
 import {
   BoxRenderable,
+  fg,
   InputRenderable,
   InputRenderableEvents,
+  type RenderContext,
   TextRenderable,
   t,
-  fg,
-  dim,
-  type RenderContext,
 } from "@opentui/core";
 
 export class SearchInput {

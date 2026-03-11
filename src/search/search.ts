@@ -1,6 +1,6 @@
 import type { Database } from "bun:sqlite";
+import { type SearchResult, searchEmbeddings } from "../db/queries.ts";
 import { embedText } from "../indexer/embedder.ts";
-import { searchEmbeddings, type SearchResult } from "../db/queries.ts";
 
 export type { SearchResult } from "../db/queries.ts";
 

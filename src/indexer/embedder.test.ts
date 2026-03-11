@@ -7,7 +7,9 @@ describe("composeEmbeddingText", () => {
       "src/auth.ts",
       "src/middleware.ts",
     ]);
-    expect(result).toBe("feat: add auth\n\nFiles: src/auth.ts, src/middleware.ts");
+    expect(result).toBe(
+      "feat: add auth\n\nFiles: src/auth.ts, src/middleware.ts",
+    );
   });
 
   test("returns just message when no files", () => {

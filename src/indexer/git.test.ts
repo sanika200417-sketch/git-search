@@ -15,7 +15,7 @@ describe("parseGitLog", () => {
     const results = parseGitLog(output);
 
     expect(results).toHaveLength(1);
-    expect(results[0]!.commit).toEqual({
+    expect(results[0]?.commit).toEqual({
       hash: "abc1234",
       message: "feat: add login",
       author_name: "Alice",
@@ -23,7 +23,7 @@ describe("parseGitLog", () => {
       date: 1700000000,
       parents: "def5678",
     });
-    expect(results[0]!.files).toEqual([
+    expect(results[0]?.files).toEqual([
       { commit_hash: "abc1234", file_path: "src/login.ts", status: "A" },
       { commit_hash: "abc1234", file_path: "src/app.ts", status: "M" },
     ]);
@@ -41,8 +41,8 @@ describe("parseGitLog", () => {
     const results = parseGitLog(output);
 
     expect(results).toHaveLength(2);
-    expect(results[0]!.commit.hash).toBe("aaa");
-    expect(results[1]!.commit.hash).toBe("bbb");
+    expect(results[0]?.commit.hash).toBe("aaa");
+    expect(results[1]?.commit.hash).toBe("bbb");
   });
 
   test("handles renames (R status with two paths)", () => {
@@ -53,7 +53,7 @@ describe("parseGitLog", () => {
 
     const results = parseGitLog(output);
 
-    expect(results[0]!.files).toEqual([
+    expect(results[0]?.files).toEqual([
       { commit_hash: "ccc", file_path: "new/path.ts", status: "R" },
     ]);
   });
@@ -69,6 +69,6 @@ describe("parseGitLog", () => {
     const results = parseGitLog(output);
 
     expect(results).toHaveLength(1);
-    expect(results[0]!.files).toEqual([]);
+    expect(results[0]?.files).toEqual([]);
   });
 });

@@ -1,27 +1,34 @@
-import { pipeline, type FeatureExtractionPipeline } from "@huggingface/transformers";
+import {
+  type FeatureExtractionPipeline,
+  pipeline,
+} from "@huggingface/transformers";
 
 const MODEL_NAME = "Xenova/all-MiniLM-L6-v2";
 const BATCH_SIZE = 32;
 
-let extractor: FeatureExtractionPipeline | null = null;
+let extractorPromise: Promise<FeatureExtractionPipeline> | null = null;
+
+async function getExtractor(): Promise<FeatureExtractionPipeline> {
+  if (!extractorPromise) {
+    extractorPromise = pipeline("feature-extraction", MODEL_NAME, {
+      dtype: "fp32",
+    });
+  }
+  return extractorPromise;
+}
 
 export async function loadModel(): Promise<void> {
-  if (extractor) return;
-  extractor = await pipeline("feature-extraction", MODEL_NAME, {
-    dtype: "fp32",
-  });
+  await getExtractor();
 }
 
 export async function embedTexts(texts: string[]): Promise<Float32Array[]> {
-  if (!extractor) {
-    await loadModel();
-  }
+  const extractor = await getExtractor();
 
   const results: Float32Array[] = [];
 
   for (let i = 0; i < texts.length; i += BATCH_SIZE) {
     const batch = texts.slice(i, i + BATCH_SIZE);
-    const output = await extractor!(batch, {
+    const output = await extractor(batch, {
       pooling: "mean",
       normalize: true,
     });
@@ -40,7 +47,8 @@ export async function embedTexts(texts: string[]): Promise<Float32Array[]> {
 
 export async function embedText(text: string): Promise<Float32Array> {
   const [embedding] = await embedTexts([text]);
-  return embedding!;
+  if (!embedding) throw new Error("Failed to generate embedding");
+  return embedding;
 }
 
 export function composeEmbeddingText(
