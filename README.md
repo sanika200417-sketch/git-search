@@ -1,5 +1,11 @@
 # git-search
 
+[![Bun](https://img.shields.io/badge/runtime-Bun-f9f1e1?logo=bun&logoColor=000)](https://bun.sh)
+[![SQLite](https://img.shields.io/badge/storage-SQLite-003B57?logo=sqlite&logoColor=fff)](https://www.sqlite.org)
+[![Transformers.js](https://img.shields.io/badge/embeddings-Transformers.js-FFD21E?logo=huggingface&logoColor=000)](https://huggingface.co/docs/transformers.js)
+[![License](https://img.shields.io/badge/licence-private-red)]()
+[![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=fff)](https://www.typescriptlang.org)
+
 Semantic search over your git commit history, right in the terminal.
 
 Type a natural language query and instantly find relevant commits — no need to remember exact messages, file names, or dates. Powered by local embeddings, everything stays on your machine.
